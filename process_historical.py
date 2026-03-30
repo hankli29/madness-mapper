@@ -73,4 +73,5 @@ while (i < len(matchups_df)): # len(df) returns num ROWS
 match_stats_df = pd.concat(data_rows).reset_index(drop=True)
 # print(match_stats_df.head())
 
+# save historical data to a separate csv file so data can be imported and used in other files
 match_stats_df.to_csv("/Users/hankli/bracket-brain/historical_data.csv")
