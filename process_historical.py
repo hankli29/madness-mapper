@@ -72,3 +72,5 @@ while (i < len(matchups_df)): # len(df) returns num ROWS
 # concatenating vertically keeps each row's row index (all 0s in this case) -> must reset index
 match_stats_df = pd.concat(data_rows).reset_index(drop=True)
 # print(match_stats_df.head())
+
+match_stats_df.to_csv("/Users/hankli/bracket-brain/historical_data.csv")
