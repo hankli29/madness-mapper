@@ -30,7 +30,7 @@ kenpom_bart_df.set_index(["YEAR", "TEAM"], inplace=True)
 # YEAR and TEAM to match outcome with corresponding team's stats, score to determine winner
 matchups_df = pd.read_csv(f"{path}/Tournament Matchups.csv")[["YEAR", "TEAM", "SCORE"]]
 matchups_df = matchups_df[matchups_df["YEAR"] < 2026].reset_index(drop=True)
-# print(matchups_df.head())
+
 
 i = 0
 # create empty df with specified columns
@@ -52,13 +52,13 @@ while (i < len(matchups_df)): # len(df) returns num ROWS
 
     # the winner should be stored as a number: the model learns from numbers, so team name as text wouldn't be helpful
     if score1 > score2:
-        winner = 1
+        winner = 0
     else:
-        winner = 2
+        winner = 1
     
     # indexing with double braces returns a data frame, NOT a series
-    t1_data = kenpom_bart_df.loc[[(year, team1)]]
-    t2_data = kenpom_bart_df.loc[[(year, team2)]]
+    t1_data = kenpom_bart_df.loc[[(year, team1)]].drop("ROUND", axis = 1)
+    t2_data = kenpom_bart_df.loc[[(year, team2)]].drop("ROUND", axis = 1)
 
     # rename the columns of each individual data frame to avoid name collisions -> prevent ambiguity
     # multi-indices were originally different -> reset index to have resulting data frame be single row and avoid NaNs
@@ -71,7 +71,8 @@ while (i < len(matchups_df)): # len(df) returns num ROWS
 
 # concatenating vertically keeps each row's row index (all 0s in this case) -> must reset index
 match_stats_df = pd.concat(data_rows).reset_index(drop=True)
-# print(match_stats_df.head())
+
 
 # save historical data to a separate csv file so data can be imported and used in other files
-match_stats_df.to_csv("/Users/hankli/bracket-brain/historical_data.csv")
+# by fault pandas saves row indices as an extra column -> unnecessary and model will treat as a feature (unwanted)
+match_stats_df.to_csv("/Users/hankli/bracket-brain/historical_data.csv", index=False)
