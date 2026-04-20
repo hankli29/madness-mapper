@@ -21,7 +21,7 @@ x_train, x_test, y_train, y_test = train_test_split(historical_stats, historical
 params = {
     "n_estimators": 100,
     "max_depth": 4,
-    "learning_rate": 0.1,
+    "learning_rate": 0.05,
 }
 
 mlflow.set_experiment("bracketbrain")
@@ -42,6 +42,8 @@ with mlflow.start_run():
     mlflow.log_params(params)
     mlflow.log_metric("accuracy", accuracy)
     mlflow.xgboost.log_model(model, name="model")
+
+    # mlflow.xgboost.auto_log() automatically logs all these metrics, can replace above
 
     print(f"Accuracy: {accuracy:.4f}")
 
