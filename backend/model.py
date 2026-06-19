@@ -7,8 +7,10 @@ import mlflow
 import mlflow.xgboost
 from pathlib import Path
 
+# path of project root
+base_dir = Path(__file__).resolve().parent.parent
 
-historical_data = pd.read_csv("../historical_data.csv")
+historical_data = pd.read_csv(base_dir / "data" / "historical_data.csv")
 
 # drop method returns data frame excluding specified rows/cols (axis defaults to 0 (rows))
 historical_stats = historical_data.drop("WINNER", axis=1)
