@@ -7,7 +7,7 @@ from predict import predict_winner
 st.title("BracketBrain")
 
 base_dir = Path(__file__).resolve().parent.parent
-st.logo(base_dir / "logo.png", size="large")
+st.logo(base_dir / "pictures" / "logo.png", size="large")
 st.html("""
 <style>
 img[alt=Logo] {
