@@ -40,7 +40,7 @@ gemini_key = os.getenv("GEMINI_API_KEY")
 client = get_gemini_client(gemini_key)
 
 st.title("BracketBrain")
-st.set_page_config(page_title="BracketBrain", page_icon=f"{base_dir}/pictures/favicon.png")
+st.set_page_config(page_title="MadnessMapper", page_icon=f"{base_dir}/pictures/favicon.png")
 
 # if st.context.theme.type == "light":
    # st.logo(base_dir / "pictures" / "light_logo.png", size="large")
