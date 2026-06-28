@@ -8,6 +8,10 @@ def main():
 
     df = df[["Date", "Team", "Close", "ML", "YEAR"]]
 
+    # games with no favorite/underdog have point spread as pk (PICKEM)
+    # equivalent to 0, convert to avoid being treated as NaN/NL
+    df["Close"] = df["Close"].replace({"pk": 0})
+
     # convert strings from csv to numeric values
     # for games without odds, convert value to NaN
     df["Close"] = pd.to_numeric(df["Close"], errors="coerce")
@@ -31,7 +35,7 @@ def main():
         if (pd.isna(team1["Close"]) or pd.isna(team1["ML"])) or (pd.isna(team2["Close"]) or pd.isna(team2["ML"])):
             continue
 
-        if team1["ML"] < 0:
+        if team1["ML"] < team2["ML"]:
             # favored team's close == spread for favored team
             # underdog team's close == total point o/u
             spread_t1 = -1 * team1["Close"]
