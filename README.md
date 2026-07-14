@@ -8,7 +8,7 @@ Machine learning-powered NCAA basketball tournament matchup predictor with live 
 
 MadnessMapper predicts likely winners of NCAA basketball tournament matchups using an XGBoost model trained on team-level efficiency metrics and historical betting market data. Users select two teams and get a winner prediction with confidence, plus a plain-language explanation generated from the model's underlying reasoning.
 
-## Tech Stack
+## Stack
 
 - **ML & Training:** Python, XGBoost, scikit-learn, MLflow
 - **Web App:** Streamlit
